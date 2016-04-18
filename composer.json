@@ -1,0 +1,29 @@
+{
+  "name": "quangvule/yii2-pdfjs",
+  "description": "PDF Viewer using PDF.js",
+  "type": "yii2-extension",
+  "keywords": ["yii2", "extension", "pdfjs", "pdfviewer", "pdfreader"],
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Vu Le",
+      "email": "quangvu.le@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "quangvule\\PDFjs\\": "src"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    },
+    "asset-installer-paths": {
+      "bower-asset-library": "vendor/bower"
+    }
+  }
+}
