@@ -23,6 +23,7 @@ class Asset extends AssetBundle
      */
     public $js = [
         'js/compatibility.js',
+        'js/l10n.js',
         'js/pdf.js',
         'js/viewer.js',
     ];
