@@ -28,12 +28,12 @@ if (typeof PDFJS === 'undefined') {
   if (typeof Uint8Array !== 'undefined') {
     // Support: iOS<6.0
     if (typeof Uint8Array.prototype.subarray === 'undefined') {
-      Uint8Array.prototype.subarray = function subarray(start, end) {
-        return new Uint8Array(this.slice(start, end));
-      };
-      Float32Array.prototype.subarray = function subarray(start, end) {
-        return new Float32Array(this.slice(start, end));
-      };
+        Uint8Array.prototype.subarray = function subarray(start, end) {
+          return new Uint8Array(this.slice(start, end));
+        };
+        Float32Array.prototype.subarray = function subarray(start, end) {
+          return new Float32Array(this.slice(start, end));
+        };
     }
 
     // Support: Android<4.1
@@ -116,7 +116,7 @@ if (typeof PDFJS === 'undefined') {
       var Test = function Test() {};
       Test.prototype = { get id() { } };
       Object.defineProperty(new Test(), 'id',
-          { value: '', configurable: true, enumerable: true, writable: false });
+        { value: '', configurable: true, enumerable: true, writable: false });
     } catch (e) {
       definePropertyPossible = false;
     }
@@ -218,7 +218,7 @@ if (typeof PDFJS === 'undefined') {
   }
 
   var digits =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
   window.btoa = function windowBtoa(chars) {
     var buffer = '';
@@ -231,7 +231,7 @@ if (typeof PDFJS === 'undefined') {
       var d3 = i + 1 < n ? ((b2 & 0xF) << 2) | (b3 >> 6) : 64;
       var d4 = i + 2 < n ? (b3 & 0x3F) : 64;
       buffer += (digits.charAt(d1) + digits.charAt(d2) +
-      digits.charAt(d3) + digits.charAt(d4));
+                 digits.charAt(d3) + digits.charAt(d4));
     }
     return buffer;
   };
@@ -246,22 +246,22 @@ if (typeof PDFJS === 'undefined') {
 
   // https://github.com/davidchambers/Base64.js
   var digits =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
   window.atob = function (input) {
     input = input.replace(/=+$/, '');
     if (input.length % 4 === 1) {
       throw new Error('bad atob input');
     }
     for (
-        // initialize result and counters
-        var bc = 0, bs, buffer, idx = 0, output = '';
-        // get next character
-        buffer = input.charAt(idx++);
-        // character found in table?
-        // initialize bit storage and add its ascii value
-        ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
-          // and if not first of each 4 characters,
-          // convert the first 8 bits to one ascii character
+      // initialize result and counters
+      var bc = 0, bs, buffer, idx = 0, output = '';
+      // get next character
+      buffer = input.charAt(idx++);
+      // character found in table?
+      // initialize bit storage and add its ascii value
+      ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
+        // and if not first of each 4 characters,
+        // convert the first 8 bits to one ascii character
         bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
     ) {
       // try to find character in table (0-63, not found => -1)
@@ -309,9 +309,9 @@ if (typeof PDFJS === 'undefined') {
           continue;
         }
         var key = attribute.name.substring(5).replace(/\-([a-z])/g,
-            function(all, ch) {
-              return ch.toUpperCase();
-            });
+          function(all, ch) {
+            return ch.toUpperCase();
+          });
         dataset[key] = attribute.value;
       }
 
@@ -457,7 +457,7 @@ if (typeof PDFJS === 'undefined') {
   // Last tested with version 6.0.4.
   // Support: Safari 6.0+
   var isSafari = Object.prototype.toString.call(
-          window.HTMLElement).indexOf('Constructor') > 0;
+                  window.HTMLElement).indexOf('Constructor') > 0;
 
   // Older versions of Android (pre 3.0) has issues with range requests, see:
   // https://github.com/mozilla/pdf.js/issues/3381.
@@ -513,7 +513,7 @@ if (typeof PDFJS === 'undefined') {
       polyfill = /Android\s[0-4][^\d]/g.test(navigator.userAgent);
     } else if (navigator.userAgent.indexOf('Safari') >= 0) {
       versionMatch = navigator.userAgent.
-          match(/Version\/([0-9]+)\.([0-9]+)\.([0-9]+) Safari\//);
+        match(/Version\/([0-9]+)\.([0-9]+)\.([0-9]+) Safari\//);
       // Safari < 6 lacks the set function.
       polyfill = versionMatch && parseInt(versionMatch[1]) < 6;
     }
@@ -552,9 +552,9 @@ if (typeof PDFJS === 'undefined') {
     return;
   }
   window.requestAnimationFrame =
-      window.mozRequestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      fakeRequestAnimationFrame;
+    window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    fakeRequestAnimationFrame;
 })();
 
 (function checkCanvasSizeLimitation() {
@@ -570,7 +570,7 @@ if (typeof PDFJS === 'undefined') {
 // Support: IE11+ (when embedded).
 (function checkFullscreenSupport() {
   var isEmbeddedIE = (navigator.userAgent.indexOf('Trident') >= 0 &&
-  window.parent !== window);
+                      window.parent !== window);
   if (isEmbeddedIE) {
     PDFJS.disableFullscreen = true;
   }
