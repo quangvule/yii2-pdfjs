@@ -1,5 +1,7 @@
 <script type="text/javascript">
     var DEFAULT_URL = '<?= $url ?>';
+    var PDFJS_OPTIONS = <?= json_encode($options) ?>;
+    var PDFJS_ASSETS_URL = '<?= $assetsUrl ?>';
 </script>
 
 <div id="outerContainer">
@@ -107,32 +109,34 @@
             <div id="toolbarContainer">
                 <div id="toolbarViewer">
                     <div id="toolbarViewerLeft">
-                        <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="11" data-l10n-id="toggle_sidebar">
+                        <button id="sidebarToggle" class="toolbarButton hidden" title="Toggle Sidebar" tabindex="11" data-l10n-id="toggle_sidebar">
                             <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
                         </button>
-                        <div class="toolbarButtonSpacer"></div>
+<!--                        <div class="toolbarButtonSpacer"></div>-->
                         <button id="viewFind" class="toolbarButton group hiddenSmallView" title="Find in Document" tabindex="12" data-l10n-id="findbar">
                             <span data-l10n-id="findbar_label">Find</span>
                         </button>
-                        <div class="splitToolbarButton">
-                            <button class="toolbarButton pageUp" title="Previous Page" id="previous" tabindex="13" data-l10n-id="previous">
-                                <span data-l10n-id="previous_label">Previous</span>
-                            </button>
-                            <div class="splitToolbarButtonSeparator"></div>
-                            <button class="toolbarButton pageDown" title="Next Page" id="next" tabindex="14" data-l10n-id="next">
-                                <span data-l10n-id="next_label">Next</span>
-                            </button>
-                        </div>
+<!--                        <div class="splitToolbarButton">-->
+<!--                            -->
+<!--                            <div class="splitToolbarButtonSeparator"></div>-->
+<!--                            -->
+<!--                        </div>-->
+                        <button class="toolbarButton pageUp" title="Previous Page" id="previous" tabindex="13" data-l10n-id="previous">
+                            <span data-l10n-id="previous_label">Previous</span>
+                        </button>
                         <label id="pageNumberLabel" class="toolbarLabel" for="pageNumber" data-l10n-id="page_label">Page: </label>
                         <input type="number" id="pageNumber" class="toolbarField pageNumber" value="1" size="4" min="1" tabindex="15">
                         <span id="numPages" class="toolbarLabel"></span>
+                        <button class="toolbarButton pageDown" title="Next Page" id="next" tabindex="14" data-l10n-id="next">
+                            <span data-l10n-id="next_label">Next</span>
+                        </button>
                     </div>
                     <div id="toolbarViewerRight">
                         <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
                             <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                         </button>
 
-                        <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="32" data-l10n-id="open_file">
+                        <button id="openFile" class="toolbarButton openFile hiddenLargeView hidden" title="Open File" tabindex="32" data-l10n-id="open_file">
                             <span data-l10n-id="open_file_label">Open</span>
                         </button>
 
@@ -140,16 +144,16 @@
                             <span data-l10n-id="print_label">Print</span>
                         </button>
 
-                        <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="34" data-l10n-id="download">
+                        <button id="download" class="toolbarButton download hiddenMediumView hidden" title="Download" tabindex="34" data-l10n-id="download">
                             <span data-l10n-id="download_label">Download</span>
                         </button>
-                        <a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView" title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark">
+                        <a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView hidden" title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark">
                             <span data-l10n-id="bookmark_label">Current View</span>
                         </a>
 
-                        <div class="verticalToolbarSeparator hiddenSmallView"></div>
+                        <div class="verticalToolbarSeparator hiddenSmallView hidden"></div>
 
-                        <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" tabindex="36" data-l10n-id="tools">
+                        <button id="secondaryToolbarToggle" class="toolbarButton hidden" title="Tools" tabindex="36" data-l10n-id="tools">
                             <span data-l10n-id="tools_label">Tools</span>
                         </button>
                     </div>
@@ -164,23 +168,23 @@
                                     <span data-l10n-id="zoom_in_label">Zoom In</span>
                                 </button>
                             </div>
-                  <span id="scaleSelectContainer" class="dropdownToolbarButton">
-                     <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
-                         <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Automatic Zoom</option>
-                         <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
-                         <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Fit Page</option>
-                         <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Full Width</option>
-                         <option id="customScaleOption" title="" value="custom"></option>
-                         <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 50 }'>50%</option>
-                         <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 75 }'>75%</option>
-                         <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 100 }'>100%</option>
-                         <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 125 }'>125%</option>
-                         <option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 150 }'>150%</option>
-                         <option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 200 }'>200%</option>
-                         <option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 300 }'>300%</option>
-                         <option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 400 }'>400%</option>
-                     </select>
-                  </span>
+                            <span id="scaleSelectContainer" class="dropdownToolbarButton">
+                                <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
+                                    <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Automatic Zoom</option>
+                                    <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
+                                    <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Fit Page</option>
+                                    <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Full Width</option>
+                                    <option id="customScaleOption" title="" value="custom"></option>
+                                    <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 50 }'>50%</option>
+                                    <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 75 }'>75%</option>
+                                    <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 100 }'>100%</option>
+                                    <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 125 }'>125%</option>
+                                    <option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 150 }'>150%</option>
+                                    <option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 200 }'>200%</option>
+                                    <option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 300 }'>300%</option>
+                                    <option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 400 }'>400%</option>
+                                </select>
+                            </span>
                         </div>
                     </div>
                 </div>

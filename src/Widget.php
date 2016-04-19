@@ -39,11 +39,12 @@ class Widget extends BaseWidget
 
     public function run()
     {
-        $this->registerAssets();
+        $asset = $this->registerAssets();
 
         return $this->render('_viewer', array(
             'url' => $this->url,
             'options' => $this->options,
+            'assetsUrl' => $asset->baseUrl,
         ));
     }
 
@@ -52,5 +53,7 @@ class Widget extends BaseWidget
         $view = $this->getView();
         $asset = Yii::$container->get(Asset::className());
         $asset = $asset::register($view);
+
+        return $asset;
     }
 }
