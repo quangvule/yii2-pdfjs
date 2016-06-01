@@ -9,7 +9,7 @@ class Asset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@quangvule/PDFjs/assets';
+    public $sourcePath = '@vendor/quangvule/yii2-pdfjs/assets';
 
     /**
      * @inheritdoc
@@ -32,6 +32,7 @@ class Asset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
+        'yii\web\YiiAsset',
         'yii\web\JqueryAsset'
     ];
 }
